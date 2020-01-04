@@ -27,7 +27,7 @@ func newDeck() deck {
 	return cards
 }
 
-func (d deck) deal(handSize int) (deck, deck) {
+func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
 }
 
@@ -52,16 +52,16 @@ func newDeckFromFile(filename string) deck {
 	return deck(s)
 }
 
-func (d deck) shuffle() {
-	source := rand.NewSource(time.Now().UnixNano())
-	r := rand.New(source)
+func (d deck) shuffle(
+	source := rand.NewSource(time.Now().UnixNano
+	r := rand.New(sour
 
 	// Option 1 with function shuffle
-	r.Shuffle(len(d), func (i, j int) {
-		d[i], d[j] = d[j], d[i]
-	})
+	r.Shuffle(len(d), func int) {
+		d[i], d[j] = d[j], d
+	
 
-	// Option 2 with Manual loop 
+	// Option 2 with Manual loop
 	// for i := range d {
 	// 	newPosition := r.Shuffle(len(d)-1)
 	// 	d[i], d[newPosition] = d[newPosition], d[i]
