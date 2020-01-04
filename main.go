@@ -2,7 +2,9 @@ package main
 
 func main() {
 	cards := newDeck()
+ards.print()
 
-	cards.shuffle()
-	cards.print()
+	// cards.deal
+	
+	
 }

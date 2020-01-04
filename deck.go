@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 
 )
 
@@ -26,7 +27,7 @@ func newDeck() deck {
 	return cards
 }
 
-func deal(d deck, handSize int) (deck, deck) {
+func (d deck) deal(handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
 }
 
@@ -52,10 +53,19 @@ func newDeckFromFile(filename string) deck {
 }
 
 func (d deck) shuffle() {
-	for i := range d {
-		newPosition := rand.Intn(len(d) - 1)
-		d[i], d[newPosition] = d[newPosition], d[i]
-	}
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
+	// Option 1 with function shuffle
+	r.Shuffle(len(d), func (i, j int) {
+		d[i], d[j] = d[j], d[i]
+	})
+
+	// Option 2 with Manual loop 
+	// for i := range d {
+	// 	newPosition := r.Shuffle(len(d)-1)
+	// 	d[i], d[newPosition] = d[newPosition], d[i]
+	// }
 }
 
 func (d deck) print() {
